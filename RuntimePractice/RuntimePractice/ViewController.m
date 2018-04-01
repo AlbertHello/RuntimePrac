@@ -35,8 +35,8 @@
     
 //    [self function1];
 //    [self function2];
-    [self function3];
-//    [self function4];
+//    [self function3];
+    [self function4];
 }
 
 ///runtime 的用途1---获取一个类的成员变量列表、属性列表、方法列表、协议列表
@@ -109,10 +109,10 @@
 
 
 -(void)function4{
-    Dog *dog=[[Dog alloc]init];
-    [dog run];//调用未实现的实例方法方法。如果不重写拯救方法，则崩溃-[Dog dogRun]: unrecognized selector sent to instance 0x604000014c90
+//    Dog *dog=[[Dog alloc]init];
+//    [dog run];//调用未实现的实例方法方法。如果不重写拯救方法，则崩溃-[Dog dogRun]: unrecognized selector sent to instance 0x604000014c90
     
-//    [Dog bark];
+    [Dog bark];
     
 }
 
