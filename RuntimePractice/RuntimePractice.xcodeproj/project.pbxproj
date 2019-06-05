@@ -19,6 +19,7 @@
 		D187F779206F4F56003D66BD /* Cat.m in Sources */ = {isa = PBXBuildFile; fileRef = D187F777206F4F56003D66BD /* Cat.m */; };
 		D187F77C206F6452003D66BD /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = D187F77B206F6452003D66BD /* Person.m */; };
 		D187F77F206F6545003D66BD /* NSMutableArray+Security.m in Sources */ = {isa = PBXBuildFile; fileRef = D187F77E206F6545003D66BD /* NSMutableArray+Security.m */; };
+		D1A649AB22A7A7B900586CD5 /* Dog+DemoExt.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A649AA22A7A7B900586CD5 /* Dog+DemoExt.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		D187F77B206F6452003D66BD /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		D187F77D206F6545003D66BD /* NSMutableArray+Security.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Security.h"; sourceTree = "<group>"; };
 		D187F77E206F6545003D66BD /* NSMutableArray+Security.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Security.m"; sourceTree = "<group>"; };
+		D1A649A922A7A7B900586CD5 /* Dog+DemoExt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dog+DemoExt.h"; sourceTree = "<group>"; };
+		D1A649AA22A7A7B900586CD5 /* Dog+DemoExt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Dog+DemoExt.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +128,8 @@
 				D187F777206F4F56003D66BD /* Cat.m */,
 				D187F775206F4F56003D66BD /* Dog.h */,
 				D187F774206F4F56003D66BD /* Dog.m */,
+				D1A649A922A7A7B900586CD5 /* Dog+DemoExt.h */,
+				D1A649AA22A7A7B900586CD5 /* Dog+DemoExt.m */,
 				D187F748206F4F10003D66BD /* Main.storyboard */,
 				D187F74B206F4F10003D66BD /* Assets.xcassets */,
 				D187F74D206F4F10003D66BD /* LaunchScreen.storyboard */,
@@ -288,6 +293,7 @@
 				D187F77C206F6452003D66BD /* Person.m in Sources */,
 				D187F747206F4F10003D66BD /* ViewController.m in Sources */,
 				D187F752206F4F10003D66BD /* main.m in Sources */,
+				D1A649AB22A7A7B900586CD5 /* Dog+DemoExt.m in Sources */,
 				D187F77F206F6545003D66BD /* NSMutableArray+Security.m in Sources */,
 				D187F778206F4F56003D66BD /* Dog.m in Sources */,
 				D187F744206F4F10003D66BD /* AppDelegate.m in Sources */,
@@ -455,7 +461,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9G4K3L68NT;
+				DEVELOPMENT_TEAM = EFH63YDHFL;
 				INFOPLIST_FILE = RuntimePractice/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AlbertWang.RuntimePractice;
@@ -469,7 +475,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9G4K3L68NT;
+				DEVELOPMENT_TEAM = EFH63YDHFL;
 				INFOPLIST_FILE = RuntimePractice/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AlbertWang.RuntimePractice;

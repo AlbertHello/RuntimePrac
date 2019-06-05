@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "Dog.h"
+#import "Dog+DemoExt.h"
 #import "Person.h"
 #import <objc/runtime.h>
 
@@ -40,10 +41,11 @@
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
-//    [self function1];
+    [self function1];
 //    [self function2];
 //    [self function3];
-    [self function4];
+//    [self function4];
+//    [self function5];
 }
 
 ///runtime 的用途1---获取一个类的成员变量列表、属性列表、方法列表、协议列表
@@ -57,6 +59,8 @@
         const char *ivarName = ivar_getName(myIvar);
         NSLog(@"Ivar---->%@", [NSString stringWithUTF8String:ivarName]);
     }
+    free(ivarList);
+    
     
     //获取类的属性列表
     objc_property_t *propertyList = class_copyPropertyList([self class], &count);
@@ -64,6 +68,8 @@
         const char *propertyName = property_getName(propertyList[i]);
         NSLog(@"property---->%@", [NSString stringWithUTF8String:propertyName]);
     }
+    free(propertyList);
+    
     
     //获取类的方法列表 还包括属性的setter 和 getter
     Method *methodList = class_copyMethodList([self class], &count);
@@ -71,6 +77,8 @@
         Method method = methodList[i];
         NSLog(@"method---->%@", NSStringFromSelector(method_getName(method)));
     }
+    free(methodList);
+    
     
     //获取类的协议列表
     __unsafe_unretained Protocol **protocolList = class_copyProtocolList([self class], &count);
@@ -79,6 +87,8 @@
         const char *protocolName = protocol_getName(myProtocal);
         NSLog(@"protocol---->%@", [NSString stringWithUTF8String:protocolName]);
     }
+    free(protocolList);
+    
 }
 
 ///runtime的用途2---快速解档归档
@@ -123,6 +133,35 @@
     
 //    [Dog bark];
     
+}
+//测试分类添加属性
+-(void)function5{
+    unsigned int count=0;
+    
+    //获取Dog的Ivar列表. 也会获取到属性的列表，并在属性名字前加下划线'_'
+    Ivar *ivarList = class_copyIvarList([Dog class], &count);
+    for (unsigned int i=0; i<count; i++) {
+        Ivar myIvar = ivarList[i];
+        const char *ivarName = ivar_getName(myIvar);
+        NSLog(@"Ivar---->%@", [NSString stringWithUTF8String:ivarName]);
+    }
+    free(ivarList);
+    
+    //获取Dog的属性列表
+    objc_property_t *propertyList = class_copyPropertyList([Dog class], &count);
+    for (unsigned int i=0; i<count; i++) {
+        const char *propertyName = property_getName(propertyList[i]);
+        NSLog(@"property---->%@", [NSString stringWithUTF8String:propertyName]);
+    }
+    free(propertyList);
+    
+    //获取Dog的方法列表 还包括属性的setter 和 getter
+    Method *methodList = class_copyMethodList([Dog class], &count);
+    for (unsigned int i=0; i<count; i++) {
+        Method method = methodList[i];
+        NSLog(@"method---->%@", NSStringFromSelector(method_getName(method)));
+    }
+    free(methodList);
 }
 
 
