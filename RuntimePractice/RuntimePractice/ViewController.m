@@ -13,7 +13,14 @@
 
 
 @interface ViewController ()
-
+{
+    //成员变量
+    NSString *_string1;
+    float _float1;
+    NSArray *_array1;
+    NSMutableDictionary *_mDict1;
+}
+//属性
 @property(nonatomic, strong)NSMutableArray      *dataSource;
 @property(nonatomic, strong)NSMutableDictionary *sortedDict;
 @property(nonatomic, strong)NSMutableArray      *sortedArray;
@@ -41,26 +48,28 @@
 
 ///runtime 的用途1---获取一个类的成员变量列表、属性列表、方法列表、协议列表
 -(void)function1{
-    unsigned int count;
+    unsigned int count=0;
+    
+    //获取类的成员变量列表 也会获取到属性的列表，并在属性名字前加下划线'_'
+    Ivar *ivarList = class_copyIvarList([self class], &count);
+    for (unsigned int i=0; i<count; i++) {
+        Ivar myIvar = ivarList[i];
+        const char *ivarName = ivar_getName(myIvar);
+        NSLog(@"Ivar---->%@", [NSString stringWithUTF8String:ivarName]);
+    }
+    
     //获取类的属性列表
     objc_property_t *propertyList = class_copyPropertyList([self class], &count);
     for (unsigned int i=0; i<count; i++) {
         const char *propertyName = property_getName(propertyList[i]);
         NSLog(@"property---->%@", [NSString stringWithUTF8String:propertyName]);
     }
-    //获取类的方法列表
+    
+    //获取类的方法列表 还包括属性的setter 和 getter
     Method *methodList = class_copyMethodList([self class], &count);
     for (unsigned int i=0; i<count; i++) {
         Method method = methodList[i];
         NSLog(@"method---->%@", NSStringFromSelector(method_getName(method)));
-    }
-    
-    //获取类的成员变量列表
-    Ivar *ivarList = class_copyIvarList([self class], &count);
-    for (unsigned int i=0; i<count; i++) {
-        Ivar myIvar = ivarList[i];
-        const char *ivarName = ivar_getName(myIvar);
-        NSLog(@"Ivar---->%@", [NSString stringWithUTF8String:ivarName]);
     }
     
     //获取类的协议列表
@@ -109,10 +118,10 @@
 
 
 -(void)function4{
-//    Dog *dog=[[Dog alloc]init];
-//    [dog run];//调用未实现的实例方法方法。如果不重写拯救方法，则崩溃-[Dog dogRun]: unrecognized selector sent to instance 0x604000014c90
+    Dog *dog=[[Dog alloc]init];
+    [dog run];//调用未实现的实例方法方法。如果不重写拯救方法，则崩溃-[Dog dogRun]: unrecognized selector sent to instance 0x604000014c90
     
-    [Dog bark];
+//    [Dog bark];
     
 }
 

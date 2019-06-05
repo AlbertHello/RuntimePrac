@@ -8,11 +8,13 @@ Runtime 是一个底层的C语言的API，称为“运行时”。而OC在编译
 ###类与对象的实质
 ####对象的实质
 1、对象是表示一个类的实例的结构体，是指向objc_object的结构体的指针。
+
 2、objc_object这个结构体只有一个成员变量，即指向其类的isa指针。这
 样，当我们向一个Objective-C对象发送消息时，runtime会根据
 实例对象的isa指针找到这个实例对象所属的类。Runtime库会在类
 的方法列表及父类的方法列表中去寻找与消息对应的selector指向
 的方法，找到后即运行这个方法。
+
 ```
 这是objc_object结构体源码
 struct objc_object {
@@ -22,6 +24,7 @@ typedef struct objc_object *id;
 ```
 ####类的实质
 1、类实际上是一个指向objc_class的结构体指针
+
 ```
 struct objc_class {
 Class _Nonnull isa  OBJC_ISA_AVAILABILITY;

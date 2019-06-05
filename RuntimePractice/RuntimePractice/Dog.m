@@ -27,13 +27,9 @@
 +(BOOL)resolveClassMethod:(SEL)sel{
     //类方法找不到时的报错处理
     NSLog(@"找不到的类方法名是%@",NSStringFromSelector(sel));
-    NSString *selString = NSStringFromSelector(sel);
-    if ([selString isEqualToString:@"bark"]){
-        Class metaClass = objc_getMetaClass("Dog");
-        class_addMethod(metaClass, sel, (IMP)functionForClassMethod, "v@:");
-        return YES;
-    }
-    return [super resolveClassMethod:sel];
+    Class metaClass = objc_getMetaClass("Dog");
+    class_addMethod(metaClass, sel, (IMP)functionForClassMethod, "v@:");
+    return YES;
 }
 Class functionForClassMethod(id self, SEL _cmd){
     NSLog(@"类方法找不到的处理，防止崩溃");
@@ -43,19 +39,17 @@ Class functionForClassMethod(id self, SEL _cmd){
 //实例方法找不到时的报错处理
 +(BOOL)resolveInstanceMethod:(SEL)sel{
     NSLog(@"找不到的实例方法名是%@",NSStringFromSelector(sel));
-    if ([NSStringFromSelector(sel) isEqualToString:@"run"]) {
-        /**
-         class_addMethod这个方法有四个参数.
-         1、第一个是要添加方法的类，
-         2、第二个是要添加的方法名，
-         3、第三个是这个方法的实现函数的指针（值的注意的是，这个函数必须显式地把self和_cmd这两个参数写出来）
-         4、第四个是方法的参数数组，在这里它是用的类型编码的方式进行表示的，因为方法一定含有self和_cmd这两个参数，所以字符数组的第二个和第三个字符一定是"@:",第一个字符代表返回值，这里为空用“v”来表示。
-         */
-        class_addMethod(self, sel, (IMP)comeHereWhenNotFoundSelector, "v@:");//C方法
-//        class_addMethod(self, sel,class_getMethodImplementation(self, @selector(replaceNotFoundSelector)), "v@:");//OC方法
-        return YES;
-    }
-    return [super resolveInstanceMethod:sel];//默认返回NO，再加上自己的处理后返回YES
+    /**
+     class_addMethod这个方法有四个参数.
+     1、第一个是要添加方法的类，
+     2、第二个是要添加的方法名，
+     3、第三个是这个方法的实现函数的指针（值的注意的是，这个函数必须显式地把self和_cmd这两个参数写出来）
+     4、第四个是方法的参数数组，在这里它是用的类型编码的方式进行表示的，因为方法一定含有self和_cmd这两个参数，所以字符数组的第二个和第三个字符一定是"@:",第一个字符代表返回值，这里为空用“v”来表示。
+     */
+    class_addMethod(self, sel, (IMP)comeHereWhenNotFoundSelector, "v@:");//C方法
+//    class_addMethod(self, sel,class_getMethodImplementation(self, @selector(replaceNotFoundSelector)), "v@:");//OC方法
+    return YES;
+//    return [super resolveInstanceMethod:sel];//默认返回NO，再加上自己的处理后返回YES
 }
 //这个c方法就是在找不到调用的方法时把那个找不到的方法的imp指针引导此处执行，避免崩溃。
 //如果是OC方法，可调用class_getMethodImplementation:获取到方法的imp指针
